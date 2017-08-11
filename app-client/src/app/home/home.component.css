@@ -1,0 +1,47 @@
+.container {
+    height: 700px;
+}
+.navbar {
+    width: 5%;
+    border: 1px solid yellow;
+    background-color: #581845;
+    float: left;
+    height: 700px;
+}
+.body-content {
+    width: 95%;
+    margin-left: 5%;
+    height: 700px;
+}
+.example-sidenav-fab-container {
+    height: 700px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+   
+  }
+
+  md-sidenav {
+      width: 300px;
+  }
+  
+  .example-sidenav-fab-container md-sidenav {
+    max-width: 400px;
+  }
+  
+  .example-sidenav-fab-container .mat-sidenav-content,
+  .example-sidenav-fab-container md-sidenav {
+    display: flex;
+    overflow: visible;
+  }
+  
+  .example-scrolling-content {
+    overflow: auto;
+  }
+  
+  .example-fab {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+  }
+  .material-icons { padding: 15px}
+  .material-icons.md-48 { font-size: 48px; }
+  .material-icons.md-light { color: rgba(255, 255, 255, 1); }

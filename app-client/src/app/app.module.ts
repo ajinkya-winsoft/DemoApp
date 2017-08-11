@@ -2,16 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdButtonModule, MdCheckboxModule, MdToolbarModule, MdSidenavModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule, MdToolbarModule, MdSidenavModule, MdIconModule} from '@angular/material';
 import * as d3 from "d3";
 
 import { AppComponent }  from './app.component';
 import { VisualizationDirective } from './directive/visualization.directive';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VisualizationDirective
+    VisualizationDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +22,8 @@ import { VisualizationDirective } from './directive/visualization.directive';
     MdButtonModule,
     MdCheckboxModule,
     MdToolbarModule,
-    MdSidenavModule
+    MdSidenavModule,
+    MdIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

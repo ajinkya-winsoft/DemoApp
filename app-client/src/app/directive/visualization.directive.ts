@@ -1,13 +1,13 @@
-import { Directive, ElementRef, EventEmitter, Input, Component } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, Component, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import * as d3 from "d3";
 @Component({
   selector: 'appVisualization',
-  inputs: ['chartType'],
+  //inputs: ['chartType'],
   template: `
       <svg width="960" height="500"  class="draggable"></svg>
     `
 })
-export class VisualizationDirective {
+export class VisualizationDirective implements OnChanges{
   loadFunc = new EventEmitter();
 
   constructor(private el: ElementRef) {
@@ -16,7 +16,16 @@ export class VisualizationDirective {
 
   visualtizationType: string;
 
-  @Input('chart-type') chartType: string;
+  @Input('chartType') chartType: string;
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    
+    // const name: SimpleChange = changes.name;
+    // console.log('prev value: ', name.previousValue);
+    // console.log('got name: ', name.currentValue);
+    //this._name = name.currentValue.toUpperCase(); 
+  }
 
   ngOnInit() {
     this.visualtizationType = this.getVisualizationType(this.chartType);

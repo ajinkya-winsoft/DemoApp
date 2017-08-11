@@ -1,0 +1,30 @@
+<div style="width: 100%; overflow: hidden;">
+  <div class="navbar">
+      <i class="material-icons md-light md-48" (click)="toggleNav('chart')">insert_chart</i>
+      <md-icon class="material-icons md-list-icon md-light md-48"  (click)="toggleNav('storage')">storage</md-icon>
+  </div>
+  <div class="body-content">
+  <md-sidenav-container class="example-sidenav-fab-container">
+    <md-sidenav #sidenav mode="side" opened="true">
+      <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+        <md-icon>add</md-icon>
+      </button>
+      <div class="example-scrolling-content">
+          <md-list>
+              <md-list-item *ngFor="let menu of menuList">
+                  <md-icon md-list-icon (click)="selectChartType(menu.type)">{{ menu.icon }}</md-icon>
+                  <h4>{{ menu.name }}</h4>
+                  <md-divider></md-divider>
+              </md-list-item>       
+            </md-list>
+      </div>
+    </md-sidenav>
+    <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+      <md-icon>add</md-icon>
+    </button>
+    <div class="example-scrolling-content">
+        <appVisualization [chartType]="chartType"></appVisualization>
+    </div>
+  </md-sidenav-container>
+</div>
+</div>
