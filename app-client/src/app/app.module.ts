@@ -6,10 +6,12 @@ import {MdButtonModule, MdCheckboxModule, MdToolbarModule, MdSidenavModule} from
 import * as d3 from "d3";
 
 import { AppComponent }  from './app.component';
+import { VisualizationDirective } from './directive/visualization.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VisualizationDirective
   ],
   imports: [
     BrowserModule,
