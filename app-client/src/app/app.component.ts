@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { interact } from 'interact.js/interact';
+// import {VisualizationDirective} from './directive/visualization.directive';
 import * as d3 from "d3";
 export class Hero {
   id: number;
@@ -67,6 +68,10 @@ export class AppComponent {
             .attr("height", function(d) { return height - y(d.frequency); });
       });
     }
+
+    loadFunc(): void {
+        console.log("hello")
+    };
 }
 var  a:AppComponent = new AppComponent();
 
