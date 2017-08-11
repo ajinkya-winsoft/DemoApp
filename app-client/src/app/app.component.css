@@ -1,0 +1,51 @@
+.example-sidenav-fab-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-fab-container md-sidenav {
+  max-width: 200px;
+}
+
+.example-sidenav-fab-container .mat-sidenav-content,
+.example-sidenav-fab-container md-sidenav {
+  display: flex;
+  overflow: visible;
+}
+
+.example-scrolling-content {
+  overflow: auto;
+}
+
+.example-fab {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+#drag-1, #drag-2 {
+  width: 25%;
+  height: 100%;
+  min-height: 6.5em;
+  margin: 10%;
+
+  background-color: #29e;
+  color: white;
+
+  border-radius: 0.75em;
+  padding: 4%;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+#drag-me::before {
+  content: "#" attr(id);
+  font-weight: bold;
+}
+
+.draggable:hover {
+    border-style: solid;
+    border-color: red;
+}
