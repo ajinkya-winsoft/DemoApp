@@ -12,7 +12,7 @@
       <div class="example-scrolling-content">
           <md-list>
               <md-list-item *ngFor="let menu of menuList">
-                  <md-icon md-list-icon (click)="selectChartType(menu.type)">{{ menu.icon }}</md-icon>
+                  <md-icon md-list-icon (click)="selectChartType(menu.type)" (selectedIdChange)="changed($event)">{{ menu.icon }}</md-icon>
                   <h4>{{ menu.name }}</h4>
                   <md-divider></md-divider>
               </md-list-item>       

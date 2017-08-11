@@ -23,9 +23,16 @@ export class HomeComponent implements OnInit {
     this.sidenav.toggle();
   };
 
-  selectChartType(chartType: string) {
-    console.log(chartType);
-    chartType = this.chartType;
+  selectChartType(visualType: string) {
+    console.log(visualType);
+    this.chartType = visualType;
+  };
+
+  changed(newValue) {
+    console.log("value changed");
+    
+    console.log('newValue', newValue);
+    //this.selectedId = newValue;
   }
 
 }
