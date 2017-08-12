@@ -17,15 +17,22 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('sidenav') sidenav : any;
   toggleNav(menu) {
-    console.log(menu);
+    //console.log(menu);
     let m = new Menu();
     this.menuList = m.getMenuList(menu);
     this.sidenav.toggle();
   };
 
-  selectChartType(chartType: string) {
-    console.log(chartType);
-    chartType = this.chartType;
+  selectChartType(visualType: string) {
+    //console.log(visualType);
+    this.chartType = visualType;
+  };
+
+  changed(newValue) {
+    console.log("value changed");
+    
+    console.log('newValue', newValue);
+    //this.selectedId = newValue;
   }
 
 }
@@ -69,8 +76,8 @@ export class Menu {
     }
 
   getMenuList(menuItem): string[] {
-    console.log("menu item being delivered");
-    console.log(this.menuList[menuItem]);
+    // console.log("menu item being delivered");
+    // console.log(this.menuList[menuItem]);
     
     return this.menuList[menuItem];
   }
