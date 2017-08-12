@@ -8,6 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class HomeComponent implements OnInit {
   menuList: any;
   chartType: string = "Barchart";
+  showVisualizationChart: boolean = true;
   droppedItems : Array<any> ;
   constructor() { 
     this.droppedItems = new Array<any>();
@@ -38,8 +39,11 @@ export class HomeComponent implements OnInit {
   }
 
   onItemDrop(e: any) {
-    // Get the dropped data here 
     this.droppedItems.push(e.dragData);
+    if(e.dragData.type == "Barchart") {
+      this.chartType = e.dragData.type;
+      this.showVisualizationChart = false;
+    }
 }
 
 }

@@ -34,6 +34,7 @@
   }
   
   .example-scrolling-content {
+    height: 700px;
     overflow: auto;
   }
   

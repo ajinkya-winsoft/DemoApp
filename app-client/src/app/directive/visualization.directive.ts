@@ -4,7 +4,7 @@ import * as d3 from "d3";
   selector: 'appVisualization',
   //inputs: ['chartType'],
   template: `
-      <svg width="960" height="500"  class="draggable"></svg>
+      <svg width="960" height="500"  class="draggable-chart"></svg>
     `
 })
 export class VisualizationDirective implements OnChanges{
