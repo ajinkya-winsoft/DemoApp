@@ -8,7 +8,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class HomeComponent implements OnInit {
   menuList: any;
   chartType: string = "Barchart";
+  droppedItems : Array<any> ;
   constructor() { 
+    this.droppedItems = new Array<any>();
   }
 
   ngOnInit() {
@@ -34,6 +36,11 @@ export class HomeComponent implements OnInit {
     console.log('newValue', newValue);
     //this.selectedId = newValue;
   }
+
+  onItemDrop(e: any) {
+    // Get the dropped data here 
+    this.droppedItems.push(e.dragData);
+}
 
 }
 

@@ -27,6 +27,7 @@
     "@types/interact.js": "^1.0.22",
     "d3": "^4.10.0",
     "interact.js": "^1.2.8",
+    "ng2-drag-drop": "^2.5.0",
     "rxjs": "^5.4.1",
     "zone.js": "^0.8.14"
   },
