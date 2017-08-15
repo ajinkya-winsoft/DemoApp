@@ -1,0 +1,18 @@
+<div>
+  <div>
+    <svg width="960" height="500" class="draggable-chart" (click)="makeInputContainerVisible()"> </svg>
+  </div>
+
+
+  <div class="inputDataContainer" [hidden]="hideInputContainer">
+    
+    <md-input-container class="example-full-width" droppable [dropScope]="'data'" (onDrop)="assignData($event, 'x')">
+      <input mdInput placeholder="X axis value" value="" class="x-data">
+    </md-input-container>
+
+    <md-input-container class="example-full-width" droppable [dropScope]="'data'" (onDrop)="assignData($event, 'y')">
+      <input mdInput placeholder="Y axis value" value="" class="y-data">
+    </md-input-container>
+
+  </div>
+</div>

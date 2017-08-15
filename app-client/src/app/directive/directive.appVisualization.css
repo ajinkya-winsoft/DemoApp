@@ -20,7 +20,7 @@
   }
 
   md-sidenav {
-      /* width: 300px; */
+      width: 300px;
   }
   
   .example-sidenav-fab-container md-sidenav {
@@ -75,4 +75,9 @@
 
 .drag-over-border {
   border: #fbbc05 dashed 2px;
+}
+
+.draggable-chart:hover {
+  /* background-color: red; */
+  border: 1px solid red;
 }

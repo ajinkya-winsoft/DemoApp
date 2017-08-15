@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { interact } from 'interact.js/interact';
-// import {VisualizationDirective} from './directive/visualization.directive';
+//import {VisualizationDirective} from './directive/visualization.directive';
 
 export class Hero {
   id: number;

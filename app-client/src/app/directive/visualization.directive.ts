@@ -1,17 +1,22 @@
-import { Directive, ElementRef, EventEmitter, Input, Component, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import { ElementRef, EventEmitter, Input, Component, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import * as d3 from "d3";
 @Component({
   selector: 'appVisualization',
   //inputs: ['chartType'],
-  template: `
-      <svg width="960" height="500"  class="draggable-chart"></svg>
-    `
+  templateUrl: './directive.appVisualization.html',
+  styleUrls: ['./directive.appVisualization.css']
 })
 export class VisualizationDirective implements OnChanges{
   loadFunc = new EventEmitter();
-
+  htmlContent: string;
+  xData: any[];
+  yData: any[];
+  menu: any;
+  hideInputContainer: boolean = true;
   constructor(private el: ElementRef) {
     console.log("directive loaded");
+    let m = new Menu();
+    this.menu = m.getMenuList('chart');
   }
 
   visualtizationType: string;
@@ -19,7 +24,9 @@ export class VisualizationDirective implements OnChanges{
   @Input('chartType') chartType: string;
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
+    console.log("change detected");
+    
+    //console.log(changes);
     
     // const name: SimpleChange = changes.name;
     // console.log('prev value: ', name.previousValue);
@@ -33,7 +40,7 @@ export class VisualizationDirective implements OnChanges{
       throw new Error("Undefined chart type");
     } else {
       let chart = new BarChart(this.visualtizationType);
-      chart.drawGraph();
+      chart.drawGraph(this.xData, this.yData);
     }
   }
 
@@ -44,6 +51,7 @@ export class VisualizationDirective implements OnChanges{
     switch (type) {
       case "Barchart": {
         this.visualtizationType = "Barchart";
+        //this.hideInputContainer = true;
         break;
       }
 
@@ -59,20 +67,93 @@ export class VisualizationDirective implements OnChanges{
     console.log("directive function called");
   }
 
+  assignData (e: any, type:string) {
+    console.log(e);
+    console.log(type);
+    if(type == 'x')
+      this.xData = e.dragData;
+    else if(type == 'y') {
+      this.yData =  e.dragData
+    }
+    
+
+    if(this.xData != undefined && this.yData != undefined ) {
+      console.log("both variable set");
+      let chart = new BarChart(this.visualtizationType);
+      chart.drawGraph(this.xData, this.yData);
+      
+    }
+    
+   console.log(e.dragData)
+    }
+
+    makeInputContainerVisible(): void {
+      this.hideInputContainer = false;
+    }
 }
+
 
 export class Chart {
   visualtizationType: String;
+  htmlContent:string;
   constructor(visualtizationType: string) {
     this.visualtizationType = visualtizationType;
   }
+
+  public sethtmlContent(content:string) {
+    this.htmlContent = content;
+  }
 }
 
-export class BarChart extends Chart {
-  drawGraph(): void {
-    var svg = d3.select("svg");
-    console.log(svg);
+export class BarChart extends Chart implements OnChanges{
+  @Input('x-data') xData: any[];
+  @Input('y-data') yData: any[];
 
+  
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("change detected");
+    
+    //console.log(changes);
+    
+    // const name: SimpleChange = changes.name;
+    // console.log('prev value: ', name.previousValue);
+    // console.log('got name: ', name.currentValue);
+    //this._name = name.currentValue.toUpperCase(); 
+  }
+  drawGraph(xdata, ydata): void {
+
+    console.log(xdata);
+    
+    if(xdata == undefined || ydata == undefined ) {
+     
+      
+      var svg = d3.select("svg");
+
+      console.log("check if image is present already");
+      console.log(svg.select("image").empty());
+      
+
+      var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+      width = +svg.attr("width") - margin.left - margin.right,
+      height = +svg.attr("height") - margin.top - margin.bottom;
+      
+      svg.append("image")
+          .attr('x',(width/2)-150)
+          .attr('y',(height/2)-100)
+          .attr('width', 300)
+          .attr('height', 200)
+          .attr("xlink:href","../../assets/images/bar-chart-1.png");
+      return;
+    }
+
+    
+    
+
+    var svg = d3.select("svg");
+    
+    svg.remove('image');
+        
     var margin = { top: 20, right: 20, bottom: 30, left: 40 },
       width = +svg.attr("width") - margin.left - margin.right,
       height = +svg.attr("height") - margin.top - margin.bottom;
@@ -83,14 +164,17 @@ export class BarChart extends Chart {
     var g = svg.append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.tsv("../assets/data/data.tsv", function (d) {
-      d.frequency = +d.frequency;
-      return d;
-    }, function (error, data) {
-      if (error) throw error;
+    // d3.tsv("../assets/data/data.tsv", function (d) {
+    //   //d.frequency = +d.frequency;
+    //  // return d;
+    // }, function (error, data) {
+    //   if (error) throw error;
 
-      x.domain(data.map(function (d) { return d.letter; }));
-      y.domain([0, d3.max(data, function (d) { return d.frequency; })]);
+      // x.domain(xdata);
+      // y.domain([0, d3.max(y, function (d) { return d.frequency; })]);
+
+      x.domain(xdata);
+      y.domain([0, d3.max(ydata)]);
 
       g.append("g")
         .attr("class", "axis axis--x")
@@ -107,15 +191,68 @@ export class BarChart extends Chart {
         .attr("text-anchor", "end")
         .text("Frequency");
 
+        var  data  = [xdata,ydata];
+        console.log("data");
+        console.log(data);
+        
+        
+
       g.selectAll(".bar")
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function (d) { return x(d.letter); })
-        .attr("y", function (d) { return y(d.frequency); })
-        .attr("width", x.bandwidth())
-        .attr("height", function (d) { return height - y(d.frequency); });
-    });
+        .attr("x", function (d, i) {console.log("d-x: %s,i : %s",d,i); console.log(d);return x(d[0]); })
+        .attr("y", function (d, i) {console.log("d-y: %s, i: %s",d,i); console.log(d); return y(d[1]); })
+        .attr("width",10)
+        .attr("height", function (d,i) { return height - y(d[1]); });
+    // });
+      
   }
 
+}
+
+export class Menu {
+  menuList: any = {
+      'chart': [
+        {
+          "name": "Bar chart",
+          "icon": "show_chart",
+          "type": "Barchart"
+        },
+        {
+          "name": "Pie chart",
+          "icon": "pie_chart",
+          "type": "Piechart"
+        },
+        {
+          "name": "Bubble chart",
+          "icon": "bubble_chart",
+          "type": "Bubblechart"          
+        }
+      ],
+      'storage': [
+        {
+          "name": "XYZ",
+          "icon": "show_chart",
+          "type": "Barchart"
+        },
+        {
+          "name": "ABC",
+          "icon": "pie_chart",
+          "type": "Barchart"
+        },
+        {
+          "name": "PQR",
+          "icon": "bubble_chart",
+          "type": "Barchart"
+        }
+      ]
+    }
+
+  getMenuList(menuItem): string[] {
+    // console.log("menu item being delivered");
+    // console.log(this.menuList[menuItem]);
+    
+    return this.menuList[menuItem];
+  }
 }
