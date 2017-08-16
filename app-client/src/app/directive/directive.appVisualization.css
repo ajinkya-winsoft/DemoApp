@@ -81,3 +81,7 @@
   /* background-color: red; */
   border: 1px solid red;
 }
+
+.inputDataContainer {
+  border: 1px solid gray;
+}

@@ -1,18 +1,27 @@
-<div>
+<div fxLayout="row" class="draggable-chart"> 
   <div>
-    <svg width="960" height="500" class="draggable-chart" (click)="makeInputContainerVisible()"> </svg>
+    <svg width="960" height="500"  (click)="makeInputContainerVisible()"></svg>
   </div>
+
+  <!-- <div [hidden]="!hideInputContainer"> <button md-fab color="primary" (click)="makeInputContainerVisible()"><md-icon>view_list</md-icon></button> </div> -->
 
 
   <div class="inputDataContainer" [hidden]="hideInputContainer">
-    
-    <md-input-container class="example-full-width" droppable [dropScope]="'data'" (onDrop)="assignData($event, 'x')">
-      <input mdInput placeholder="X axis value" value="" class="x-data">
-    </md-input-container>
+    <div fxLayout="row">
+        <md-toolbar color="primary">
+            <span>Data Items</span>
+          </md-toolbar>
+    <!-- <h3 fxFlex="80"> Data Items </h3> -->
+    <span (click)="makeInputContainerVisible()"  color="primary"><md-icon>close</md-icon></span>
+    </div>
+    <div fxLayout="column">
+      <md-input-container class="example-full-width" droppable [dropScope]="'data'" (onDrop)="assignData($event, 'x')">
+        <input mdInput placeholder="X axis value" value="" class="x-data"  [(ngModel)]="xData">
+      </md-input-container>
 
-    <md-input-container class="example-full-width" droppable [dropScope]="'data'" (onDrop)="assignData($event, 'y')">
-      <input mdInput placeholder="Y axis value" value="" class="y-data">
-    </md-input-container>
-
+      <md-input-container class="example-full-width" droppable [dropScope]="'data'" (onDrop)="assignData($event, 'y')">
+        <input mdInput placeholder="Y axis value" value="" class="y-data"  [(ngModel)]="yData">
+      </md-input-container>
+  </div>
   </div>
 </div>
