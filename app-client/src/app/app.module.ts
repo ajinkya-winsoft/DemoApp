@@ -7,10 +7,13 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
 import * as d3 from "d3";
 import { interact } from 'interact.js/interact';
 import { AppComponent }  from './app.component'
-import { HomeComponent, Menu } from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { VisualizationDirective } from './directive/visualization.directive';
 import { HttpModule }    from '@angular/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Chart} from './visualization/charts/Chart';
+import {BarChart} from './visualization/charts/Barchart'
+import {PieChart} from './visualization/charts/Piechart'
 
 @NgModule({
   declarations: [

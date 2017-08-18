@@ -22,10 +22,6 @@ export class HomeComponent {
     this.droppedItems = new Array<any>();
   }
 
-  // ngOnInit() {
-    
-  // }
-
   @ViewChild('sidenav') sidenav : any;
   toggleNav(menu) {
     //console.log(menu);
@@ -33,15 +29,16 @@ export class HomeComponent {
     this.menuList = m.getMenuList(menu);
     this.sidenav.toggle();
 
-    let d = new DataItems();
-    this.dataListX = d.getXData();
-    this.dataListY = d.getYData();
 
     console.log("data from http service");
     m.getMenuData()
         .then( result => {
           this.data = result;
-          this.dataItems = Object.keys(this.data[0]);
+          if(this.data[0])
+            this.dataItems = Object.keys(this.data[0]);
+          else 
+            this.dataItems = Object.keys(this.data);
+
         });
     
   };
@@ -76,7 +73,7 @@ export class HomeComponent {
 }
 
 @Injectable()
-export class Menu {
+class Menu {
 
   public dataList: string[];
 
@@ -84,8 +81,9 @@ constructor(private http: Http) {}
 
   getMenuData(): Promise<any> {
    let url = 'https://jsonplaceholder.typicode.com/todos';
-   url = '../../assets/data/data.json'
+  //  url = '../../assets/data/data.json'
    //url = '../../assets/data/data2.json'
+   url = '../../assets/data/metrics.json'
    return this.http.get(url)
     .map(res => res.json())
     .toPromise()
@@ -98,22 +96,12 @@ constructor(private http: Http) {}
       }
       
     ).catch(this.handleError);
-};
+  };
 
       private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
       }
-
-  // getMenuData(): string[] {
-  
-  //   this.getData().then(
-  //     result => this.dataList = result
-      
-  //   )
-  //   return this.dataList;
-  // }
-  
   
   menuList: any = {
       'chart': [
@@ -161,21 +149,5 @@ constructor(private http: Http) {}
 
   getDataList(menuItem): string[] {
     return this.dataList;
-  }
-}
-
-export class DataItems {
-  constructor() { }
-
-  dataX: any[] = ['Jan', 'Feb', 'March'];
-  dataY: any[] = [1, 3,5];
-  
-
-  getXData(): any {
-    return this.dataX;
-  }
-
-  getYData(): any {
-    return this.dataY;
   }
 }
