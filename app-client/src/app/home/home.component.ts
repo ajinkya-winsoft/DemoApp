@@ -1,4 +1,4 @@
-import { Component, ViewChild, Injectable } from '@angular/core';
+import { Component, ViewChild, Injectable, ElementRef } from '@angular/core';
 import { HttpModule, Http, Response } from '@angular/http';
 
 import 'rxjs/add/operator/map';
@@ -17,9 +17,15 @@ export class HomeComponent {
   data: any;
   chartType: string;// = "Barchart";
   showVisualizationChart: boolean = true;
+  activeComponent: string;
+  attr: string = "app-reports";
+  navBarVisiblity: boolean = false;
   droppedItems : Array<any> ;
-  constructor(private http: Http) { 
+  constructor(private http: Http,private el: ElementRef ) { 
+    console.log(el);
+    
     this.droppedItems = new Array<any>();
+   // el.attr = "app-reports";
   }
 
   @ViewChild('sidenav') sidenav : any;
@@ -70,7 +76,20 @@ export class HomeComponent {
     }
 }
 
+isComponentVisible(component: string): boolean {
+ return (component == this.activeComponent)
 }
+
+  setActiveComponent(component) {
+    this.activeComponent = component;
+    this.navBarVisiblity = true;    
+  }
+
+  isNavBarVisible()  {
+    return this.navBarVisiblity;
+  }
+}
+
 
 @Injectable()
 class Menu {
@@ -81,9 +100,9 @@ constructor(private http: Http) {}
 
   getMenuData(): Promise<any> {
    let url = 'https://jsonplaceholder.typicode.com/todos';
-  //  url = '../../assets/data/data.json'
+   url = '../../assets/data/data.json'
    //url = '../../assets/data/data2.json'
-   url = '../../assets/data/metrics.json'
+   //url = '../../assets/data/metrics.json'
    return this.http.get(url)
     .map(res => res.json())
     .toPromise()

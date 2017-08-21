@@ -1,21 +1,22 @@
 .container {
-    height: 700px;
+    /* height: 700px; */
 }
 .navbar {
-    width: 5%;
+    background-color: #581845;
+    /* width: 5%;
     border: 1px solid yellow;
     background-color: #581845;
     float: left;
-    height: 700px;
+    height: 700px; */
 }
 .body-content {
-    width: 95%;
-    margin-left: 5%;
-    height: 700px;
+    /* width: 95%; */
+    /* margin-left: 5%;
+    height: 700px; */
 }
 .example-sidenav-fab-container {
-    height: 700px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 100%; 
+    /* border: 1px solid rgba(0, 0, 0, 0.5);
    
   }
 
@@ -24,24 +25,25 @@
   }
   
   .example-sidenav-fab-container md-sidenav {
-    max-width: 400px;
+    /* max-width: 400px; */
   }
   
   .example-sidenav-fab-container .mat-sidenav-content,
   .example-sidenav-fab-container md-sidenav {
-    display: flex;
-    overflow: visible;
+    /* display: flex; */
+    /* overflow: visible; */
   }
   
   .example-scrolling-content {
-    height: 700px;
-    overflow: auto;
+    /* height: 700px;
+    overflow: auto; */
+    background-color: #263238;
   }
   
   .example-fab {
-    position: absolute;
+    /* position: absolute;
     right: 20px;
-    bottom: 10px;
+    bottom: 10px; */
   }
   .material-icons { padding: 15px}
   .material-icons.md-48 { font-size: 48px; }

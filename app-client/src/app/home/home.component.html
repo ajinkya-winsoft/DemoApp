@@ -1,11 +1,24 @@
-<div style="width: 100%; overflow: hidden;">
-  <div class="navbar">
+<div fxLayout="row" fxFill>
+  <div fxFlex="5" class="navbar" [hidden]="isNavBarVisible()">
       <i class="material-icons md-light md-48" (click)="toggleNav('chart')">insert_chart</i>
       <md-icon class="material-icons md-list-icon md-light md-48"  (click)="toggleNav('storage')">storage</md-icon>
+      <button md-button [mdMenuTriggerFor]="menu">
+        <md-icon class="material-icons md-list-icon md-light md-48">add</md-icon>
+      </button>
+      
+      <md-menu #menu="mdMenu" [overlapTrigger]="false" >
+        <button md-menu-item (click)="setActiveComponent('app-reports')">
+          <md-icon>dialpad</md-icon>
+          <span>Report</span>
+        </button>
+        <button md-menu-item (click)="setActiveComponent('app-data-moduels')">
+          <md-icon>notifications_off</md-icon>
+          <span>Data Moduels</span>
+        </button>
+      </md-menu>
   </div>
-  <div class="body-content">
-  <md-sidenav-container class="example-sidenav-fab-container">
-    <md-sidenav #sidenav mode="side" opened="false">
+  <!-- <md-sidenav-container fxLayout="row" class="example-sidenav-fab-container" >
+    <md-sidenav #sidenav mode="side" opened="false" fxFlex="30">
       <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
         <md-icon>add</md-icon>
       </button>
@@ -29,9 +42,17 @@
     <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
       <md-icon>add</md-icon>
     </button> -->
-    <div class="example-scrolling-content" droppable [dropScope]="'chart'" (onDrop)="onItemDrop($event)">
-        <appVisualization [hidden]="showVisualizationChart" [chartType]="chartType" [chartData]="data"></appVisualization> 
-    </div>
-  </md-sidenav-container>
+    <!-- <div fxFill class="example-scrolling-content" droppable [dropScope]="'chart'" (onDrop)="onItemDrop($event)">
+        <!-- <appVisualization [hidden]="showVisualizationChart" [chartType]="chartType" [chartData]="data"></appVisualization>  -->
+        <!-- <div *ngIf="isComponentVisible('app-reports')" app-reports></div>
+        <div *ngIf="isComponentVisible('app-data-moduels')" app-data-moduels></div> -->
+    <!-- </div>
+  </md-sidenav-container> --> 
+
+<!-- </button> --> 
+<div fxFill class="example-scrolling-content" droppable [dropScope]="'chart'" (onDrop)="onItemDrop($event)">
+    <!-- <appVisualization [hidden]="showVisualizationChart" [chartType]="chartType" [chartData]="data"></appVisualization>  -->
+    <div *ngIf="isComponentVisible('app-reports')" app-reports style="height: 100%"></div>
+    <div *ngIf="isComponentVisible('app-data-moduels')" app-data-moduels style="height: 100%"></div>
 </div>
 </div>

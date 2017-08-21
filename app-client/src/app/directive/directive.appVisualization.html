@@ -1,20 +1,20 @@
 <div fxLayout="row" class="draggable-chart"> 
-  <div>
-    <svg width="960" height="500"  (click)="makeInputContainerVisible()"></svg>
+  <div fxFlex="70">
+    <svg   (click)="makeInputContainerVisible()"></svg>
   </div>
 
   <!-- <div [hidden]="!hideInputContainer"> <button md-fab color="primary" (click)="makeInputContainerVisible()"><md-icon>view_list</md-icon></button> </div> -->
 
 
-  <div class="inputDataContainer" [hidden]="hideInputContainer">
-    <div fxLayout="row">
+  <div fxFlex="30" class="inputDataContainer" [hidden]="hideInputContainer" fxLayout="column">
+    <div fxFlex>
         <md-toolbar color="primary">
             <span>Data Items</span>
           </md-toolbar>
     <!-- <h3 fxFlex="80"> Data Items </h3> -->
     <span (click)="makeInputContainerVisible()"  color="primary"><md-icon>close</md-icon></span>
     </div>
-    <div fxLayout="column">
+    <div fxFill>
       <md-input-container class="example-full-width" droppable [dropScope]="'data'" (onDrop)="assignData($event, 'x')">
         <input mdInput placeholder="X axis value" value="" class="x-data"  [(ngModel)]="xData">
       </md-input-container>

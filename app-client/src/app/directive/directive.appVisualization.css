@@ -1,30 +1,30 @@
 .container {
-    height: 700px;
+    /* height: 700px; */
 }
 .navbar {
-    width: 5%;
+    /* width: 5%; */
     border: 1px solid yellow;
     background-color: #581845;
-    float: left;
-    height: 700px;
+    /* float: left;
+    height: 700px; */
 }
 .body-content {
-    width: 95%;
+    /* width: 95%;
     margin-left: 5%;
-    height: 700px;
+    height: 700px; */
 }
 .example-sidenav-fab-container {
-    height: 700px;
+    /* height: 700px; */
     border: 1px solid rgba(0, 0, 0, 0.5);
    
   }
 
   md-sidenav {
-      width: 300px;
+      /* width: 300px; */
   }
   
   .example-sidenav-fab-container md-sidenav {
-    max-width: 400px;
+    /* max-width: 400px; */
   }
   
   .example-sidenav-fab-container .mat-sidenav-content,
@@ -34,8 +34,8 @@
   }
   
   .example-scrolling-content {
-    height: 700px;
-    overflow: auto;
+    /* height: 700px;
+    overflow: auto; */
   }
   
   .example-fab {

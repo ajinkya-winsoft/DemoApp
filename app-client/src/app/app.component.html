@@ -1,8 +1,15 @@
-<md-toolbar color="primary">
-  <span>Sample  Application {{title}}</span>
+<div fxLayout="column" fxFill fxLayoutAlign="space-between stretch" >
+<md-toolbar fxFlex="10" color="primary">
+  <div fxLayout="row" fxFill>
+    <div fxFlex="30"><span>{{title}}</span> </div>
+    <div fxFlex> </div>
+    <div fxFlex="5">
+      <md-icon class="material-icon md-48 md-light">face </md-icon>
+     </div>
+  </div>
 </md-toolbar>
-<div fxLayout="column">
-  <app-home fxFill></app-home>
+<div fxFlex fxFill>
+  <app-home></app-home>
     <!-- <div>
         <appVisualization chart-type="Barchart"></appVisualization>
     </div>
@@ -13,4 +20,5 @@
   <div id="drag-2" class="draggable">
     <p> with each pointer </p>
   </div> -->
+</div>
 </div>
