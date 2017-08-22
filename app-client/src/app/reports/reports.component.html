@@ -2,10 +2,10 @@
   <div fxFlex="20"  style="background-color: #37474F">
     <div fxLayout="column" fxFill fxLayoutAlign="start stretch" >
       <div fxFlex="10">
-        <md-icon class="material-icons md-48 md-light" (click)="sidenav.toggle()"> storage </md-icon>
+        <md-icon class="material-icons md-48 md-light" (click)="toggleNav('dataSource')"> storage </md-icon>
       </div>
       <div fxFlex="10">
-          <md-icon class="material-icons md-48 md-light" (click)="sidenav.toggle()"> settings </md-icon>
+          <md-icon class="material-icons md-48 md-light" (click)="toggleNav('settings')"> settings </md-icon>
       </div>
     </div>
   </div>
@@ -15,32 +15,40 @@
         <!-- <button md-fab color="primary" [mdMenuTriggerFor]="appMenu"><md-icon class="material-icons md-48"> add </md-icon></button> -->
 
         <md-sidenav-container fxFill class="example-sidenav-fab-container">
-        <md-sidenav #sidenav mode="side" opened="false" style="max-width: 30%; width: 100%">
-
+        <md-sidenav #sidenav mode="side" opened="false" style="max-width: 30%; width: 100%; background-color: #ECEFF1">
+            <!-- <ng-container [ngTemplateOutlet]="'activeSiveNav'"></ng-container> -->
+          <div [ngSwitch]="activeSiveNav">
+            <div *ngSwitchCase="'dataSource'"><ng-container [ngTemplateOutlet]="dataSource"></ng-container></div>
+            <div *ngSwitchCase="'settings'"><ng-container [ngTemplateOutlet]="settings"></ng-container></div>
+          </div>
+          <ng-template #dataSource>
             <md-tab-group>
                 <md-tab>
                   <ng-template md-tab-label>
                    <strong> Data Source </strong>
                   </ng-template>
-                  <h1>Select Data Source</h1>
+                  <h3>Select Data Source</h3>
                   <p>...</p>
                 </md-tab>
                 <md-tab>
                   <ng-template md-tab-label>
                     <strong> Data Items </strong>
                   </ng-template>
-                  <h1>Select Data Items</h1>
+                  <h3>Select Data Items</h3>
                   <p>...</p>
                 </md-tab>
               </md-tab-group>
+            </ng-template>
+
+            <ng-template #settings>
+              Settings
+            </ng-template>
            
           </md-sidenav> 
-          <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
-            <md-icon>add</md-icon>
-          </button> -->
+         
           <div fxFill fxLayout="row" fxLayoutAlign="center center" class="example-scrolling-content" droppable [dropScope]="'chart'" (onDrop)="onItemDrop($event)">
-              <!-- <appVisualization [hidden]="showVisualizationChart" [chartType]="chartType" [chartData]="data"></appVisualization>  -->
-              <button md-fab color="primary" [mdMenuTriggerFor]="appMenu"><md-icon class="material-icons md-48"> add </md-icon></button>
+              <appVisualization *ngIf="hideVisualizationChart" [chartType]="chartType" [chartData]="data"  style="width: 100%; height: 100%"></appVisualization> 
+              <button *ngIf="!hideVisualizationChart" md-fab color="primary" [mdMenuTriggerFor]="appMenu"><md-icon class="material-icons md-48"> add </md-icon></button>
           </div>
         </md-sidenav-container> 
      <!-- </div> -->
@@ -49,7 +57,7 @@
 
 <md-menu #appMenu="mdMenu"  xPosition="before" yPosition="above" [overlapTrigger]="true">
     <div fxLayout="column">
-      <div fxFlex><button md-menu-item> <md-icon>bar_chart</md-icon><span>Bar Chart </span></button></div>
-      <div fxFlex><button md-menu-item> <md-icon>pie_chart</md-icon><span>Pie Chart</span> </button></div>
+      <div fxFlex><button md-menu-item (click)="setVisualization('Barchart')"> <md-icon>bar_chart</md-icon><span>Bar Chart </span></button></div>
+      <div fxFlex><button md-menu-item (click)="setVisualization('Piechart')"> <md-icon>pie_chart</md-icon><span>Pie Chart</span> </button></div>
     </div>
   </md-menu>
