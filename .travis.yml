@@ -1,21 +1,22 @@
-language: node_js
-node_js:
-  - "6.9"
+language: java
+# node_js:
+#   - "6.9"
 
-branches:
-  only:
-    - master
+# branches:
+#   only:
+#     - master
 
-before_script:
-  - npm install
+# before_script:
+#   - npm install -g firebase-tools
+#   - npm install
 
-script:
-  - ng build --prod
+# script:
+#   - ng build --prod
 
-after_success:
-  - npm start
+# after_success:
+#   - npm start
 
-notifications:
-  email:
-    on_failure: change
-    on_success: change
+# notifications:
+#   email:
+#     on_failure: change
+#     on_success: change
