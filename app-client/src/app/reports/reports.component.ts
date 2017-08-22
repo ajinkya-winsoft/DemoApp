@@ -37,4 +37,8 @@ export class ReportsComponent implements OnInit {
   ngOnInit() {
   }
 
+  onItemDrop(e: any) {
+
+  }
+
 }
